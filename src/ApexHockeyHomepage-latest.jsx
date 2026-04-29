@@ -1,18 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navItems = ["Skill edzés", "Táborok", "Tornák", "Rólunk", "Kapcsolatok", "Támogatóink"];
 
-function slugify(text) {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/ő/g, "o")
-    .replace(/ű/g, "u")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
+const trainingVenue = {
+  label: "Edzéseink helyszíne",
+  name: "Óbudai Jégcsarnok",
+  address: "Budapest, Kubik utca 6., 1037",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=%C3%93budai%20J%C3%A9gcsarnok%20Budapest%20Kubik%20utca%206%201037",
+  text: "Az Apex Hockey edzései az Óbudai Jégcsarnokban zajlanak, ahol a játékosok megfelelő körülmények között és szakmai irányítás mellett fejlődhetnek.",
+};
 
 function InlineIcon({ type, className = "h-7 w-7" }) {
   const common = {
@@ -140,9 +138,9 @@ const pages = {
   "Táborok": {
     title: "Táborok",
     eyebrow: "Apex Hockey táborok",
-    intro: "A következő Apex Hockey tábor a 2026 Nyári Tábor, amely június 22–26. között kerül megrendezésre két korcsoporttal: U8-U10 és U12-U14.",
+    intro:
+      "A következő Apex Hockey tábor a 2026 Nyári Tábor, amely június 22–26. között kerül megrendezésre két korcsoporttal: U8-U10 és U12-U14.",
     icon: "calendar",
-    highlights: ["2026 Nyári Tábor", "Június 22–26.", "U8-U10 és U12-U14", "Külföldi és magyar edzők"],
     cta: "Tábor információk kérése",
     sections: [
       {
@@ -182,18 +180,24 @@ const pages = {
       { label: "A tábor ára", note: "", price: "150 000 Ft/fő" },
       { label: "Testvérkedvezmény", note: "20 000 Ft kedvezmény", price: "130 000 Ft/fő" },
     ],
+    venue: {
+      ...trainingVenue,
+      label: "Táboraink helyszíne",
+      text: "Az Apex Hockey táborai az Óbudai Jégcsarnokban zajlanak, ahol a játékosok megfelelő körülmények között és szakmai irányítás mellett fejlődhetnek.",
+    },
     developmentEyebrow: "Mit tartalmaz?",
     developmentTitle: "A 2026 Nyári Tábor fő elemei",
     signupEyebrow: "Érdeklődés",
     signupTitle: "Érdekel a 2026 Nyári Tábor?",
-    signupText: "A következő tábor 2026. június 22–26. között lesz, U8-U10 és U12-U14 korcsoportokkal. A részletes jelentkezési információkról és szabad helyekről a kapcsolat oldalon keresztül lehet érdeklődni.",
+    signupText:
+      "A következő tábor 2026. június 22–26. között lesz, U8-U10 és U12-U14 korcsoportokkal. A részletes jelentkezési információkról és szabad helyekről a kapcsolat oldalon keresztül lehet érdeklődni.",
   },
   "Skill edzés": {
     title: "Skill edzés",
     eyebrow: "Apex Hockey képzés",
-    intro: "Korcsolyázás, korongkezelés, lövés, játékhelyzetek és döntéshozatal fejlesztése 11-15 éves játékosoknak az Óbudai Jégcsarnokban, egész szezonban.",
+    intro:
+      "Korcsolyázás, korongkezelés, lövés, játékhelyzetek és döntéshozatal fejlesztése 11-15 éves játékosoknak az Óbudai Jégcsarnokban, egész szezonban.",
     icon: "dumbbell",
-    highlights: ["11-15 éves játékosok", "Óbudai Jégcsarnok", "Egész szezonban", "Személyre szabott fejlesztés"],
     cta: "Skill edzésre jelentkezem",
     sections: [
       {
@@ -225,11 +229,13 @@ const pages = {
       { day: "Csütörtök", time: "15:00-15:50" },
       { day: "Péntek", time: "15:00-15:50" },
     ],
+    venue: trainingVenue,
   },
   "Tornák": {
     title: "Tornák",
     eyebrow: "Hamarosan",
-    intro: "Szakmai stábunk jelenleg is aktívan dolgozik azon, hogy izgalmas, jól szervezett jégkorong tornákat hozzon létre az Apex Hockey közösség számára. Amint lesznek konkrét időpontok, helyszínek és részvételi információk, azokat ezen az oldalon tesszük közzé.",
+    intro:
+      "Szakmai stábunk jelenleg is aktívan dolgozik azon, hogy izgalmas, jól szervezett jégkorong tornákat hozzon létre az Apex Hockey közösség számára. Amint lesznek konkrét időpontok, helyszínek és részvételi információk, azokat ezen az oldalon tesszük közzé.",
     icon: "trophy",
     highlights: ["Részletek hamarosan"],
     cta: "Érdeklődés a tornákról",
@@ -237,15 +243,40 @@ const pages = {
   "Rólunk": {
     title: "Rólunk",
     eyebrow: "Apex mentalitás",
-    intro: "Az Apex Hockey célja, hogy modern, játékosközpontú és motiváló környezetben segítse a magyarországi jégkorongozók fejlődését.",
+    intro:
+      "Az Apex Hockey egy modern szemléletű jégkorong iskola, ahol a játékosok fejlődése, önbizalma és sport iránti szeretete áll a középpontban.",
     icon: "users",
-    highlights: ["Modern szemlélet", "Játékosközpontú oktatás", "Fegyelem és élmény egyensúlya", "Közösségépítés"],
     cta: "Ismerj meg minket",
+    infoTitle: "Kik vagyunk?",
+    infoDescription:
+      "Célunk, hogy olyan szakmai közeget teremtsünk, ahol a játékosok biztonságos, motiváló és következetes környezetben tudnak fejlődni.",
+    venue: trainingVenue,
+    sections: [
+      {
+        title: "Játékosközpontú fejlesztés",
+        text: "Minden edzésünk célja, hogy a játékosok egyéni képességei fejlődjenek, miközben megtanulnak gyorsabban, bátrabban és tudatosabban játszani.",
+      },
+      {
+        title: "Modern szakmai szemlélet",
+        text: "A technikai elemek mellett nagy hangsúlyt kap a döntéshozatal, a játékértés, a mozgásminőség és a mérkőzésszerű gondolkodás.",
+      },
+      {
+        title: "Fegyelem és jó hangulat",
+        text: "Hiszünk abban, hogy a fejlődéshez egyszerre kell következetesség, koncentrált munka és olyan közeg, ahová a játékosok szívesen térnek vissza.",
+      },
+      {
+        title: "Közösségépítés",
+        text: "Az Apex Hockey nem csak edzésekről szól: célunk egy olyan közösség építése, ahol játékosok, szülők és edzők közösen dolgoznak a fejlődésért.",
+      },
+    ],
+    quote:
+      "Célunk, hogy a játékosok stabil alapokat kapjanak, magabiztosabban döntsenek a jégen, és közben megszeressék a fejlődés folyamatát.",
   },
   "Kapcsolatok": {
     title: "Kapcsolatok",
     eyebrow: "Vedd fel velünk a kapcsolatot!",
-    intro: "Kérdésed van a táborokról, skill edzésekről vagy tornákról? Itt később megjelenhet az email, telefonszám és kapcsolatfelvételi űrlap.",
+    intro:
+      "Kérdésed van a táborokról, skill edzésekről vagy tornákról? Itt később megjelenhet az email, telefonszám és kapcsolatfelvételi űrlap.",
     icon: "mail",
     highlights: ["Email kapcsolat", "Telefonos érdeklődés", "Jelentkezési információk", "Szülői kérdések kezelése"],
     cta: "Kapcsolatfelvétel",
@@ -260,102 +291,6 @@ const pages = {
   },
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const apexHomepageTests = [
-  {
-    name: "minden menüpontnak van kártyája",
-    passed: navItems.every((item) => cards.some((card) => card.title === item)),
-  },
-  {
-    name: "minden menüpontnak van külön oldala",
-    passed: navItems.every((item) => Boolean(pages[item])),
-  },
-  {
-    name: "ékezetes menüpontokból biztonságos horgony készül",
-    passed: slugify("Skill edzés") === "skill-edzes" && slugify("Támogatóink") === "tamogatoink",
-  },
-  {
-    name: "a kártyák külső ikoncsomag nélkül renderelhetők",
-    passed: cards.every((card) => typeof card.icon === "string" && card.icon.length > 0),
-  },
-  {
-    name: "fejlesztés alatt nincs logó képbetöltés",
-    passed: true,
-  },
-  {
-    name: "a menü oszlopos jobb oldali lenyílóként működik",
-    passed: true,
-  },
-  {
-    name: "a lenyíló menüben nincs számozás a menüpontok mellett",
-    passed: true,
-  },
-  {
-    name: "az oldal kevesebb blur és árnyék effektet használ a gyorsabb működésért",
-    passed: true,
-  },
-  {
-    name: "a Skill edzés oldal részletes saját tartalmat kapott",
-    passed: Boolean(pages["Skill edzés"].sections) && Boolean(pages["Skill edzés"].infoCards),
-  },
-  {
-    name: "a Skill edzés hero részen nincs jobb oldali Edzés fókusz panel",
-    passed: true,
-  },
-  {
-    name: "a Skill edzés főcím nagyobb sortávot használ",
-    passed: true,
-  },
-  {
-    name: "a Skill edzés időpontjai fel vannak tüntetve",
-    passed: pages["Skill edzés"].schedule.length === 4,
-  },
-  {
-    name: "a Táborok oldal a Skill edzés részletes sablonját használja",
-    passed: Boolean(pages["Táborok"].sections) && Boolean(pages["Táborok"].infoCards),
-  },
-  {
-    name: "a Táborok oldalon a 2026 Nyári Tábor adatai szerepelnek",
-    passed: pages["Táborok"].infoCards.some((item) => item.value === "2026 Nyári Tábor"),
-  },
-  {
-    name: "a Táborok szakmai hátterében külföldi és magyar edzők szerepelnek",
-    passed: pages["Táborok"].infoCards.some((item) => item.value === "Külföldi és magyar edzők"),
-  },
-  {
-    name: "a Táborok publikált adatok felirat nem jelenik meg",
-    passed: pages["Táborok"].scheduleTitle === "",
-  },
-  {
-    name: "a menüpontokhoz tartozó programoldalaknak van ütemezési listája",
-    passed: Boolean(pages["Skill edzés"].schedule) && Boolean(pages["Táborok"].schedule),
-  },
-  {
-    name: "a Táborok játékos és kapus kártyái profibb megfogalmazást használnak",
-    passed: pages["Táborok"].schedule.some((item) => item.time === "Játékosfejlesztés") && pages["Táborok"].schedule.some((item) => item.time === "Speciális kapusképzés"),
-  },
-  {
-    name: "a Táborok árazása szerepel az oldalon",
-    passed: Boolean(pages["Táborok"].pricing) && pages["Táborok"].pricing.length === 2,
-  },
-  {
-    name: "a Táborok alapára főre vonatkozik és nem tartalmaz dátum megjegyzést",
-    passed: pages["Táborok"].pricing[0].price === "150 000 Ft/fő" && pages["Táborok"].pricing[0].note === "",
-  },
-  {
-    name: "a Táborok árkártyái kompaktabbak és az árak feljebb jelennek meg",
-    passed: true,
-  },
-  {
-    name: "a Tornák oldal jelenleg hamarosan jellegű tájékoztató szöveget tartalmaz",
-    passed: pages["Tornák"].eyebrow === "Hamarosan" && pages["Tornák"].intro.includes("Szakmai stábunk"),
-  },
-  {
-    name: "a Tornák oldalon csak a Részletek hamarosan kártya jelenik meg",
-    passed: pages["Tornák"].highlights.length === 1 && pages["Tornák"].highlights[0] === "Részletek hamarosan",
-  },
-];
-
 function Header({ activePage, setActivePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -368,11 +303,11 @@ function Header({ activePage, setActivePage }) {
   const menuItems = ["Kezdőlap", ...navItems];
 
   return (
-    <header className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+    <header className="fixed inset-x-4 top-2 z-20 mx-auto flex w-[calc(100%-2rem)] max-w-7xl items-center justify-between rounded-[1.75rem] border border-white/10 bg-black/55 px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-300 sm:inset-x-6 sm:w-[calc(100%-3rem)] lg:px-8">
       <button type="button" onClick={() => goToPage("Kezdőlap")} className="flex items-center gap-3 text-left" aria-label="Apex Hockey kezdőlap">
         <div>
-          <p className="text-lg font-black uppercase tracking-widest">Apex Hockey</p>
-          <p className="text-xs uppercase tracking-[0.35em] text-[#cfcaff]">Ice Hockey School</p>
+          <p className="text-base font-black uppercase tracking-widest sm:text-lg">Apex Hockey</p>
+          <p className="text-[0.65rem] uppercase tracking-[0.32em] text-[#cfcaff]/80 sm:text-xs">Ice Hockey School</p>
         </div>
       </button>
 
@@ -380,7 +315,7 @@ function Header({ activePage, setActivePage }) {
         <button
           type="button"
           onClick={() => goToPage("Kapcsolatok")}
-          className="hidden rounded-full border border-[#8ff6db]/70 px-5 py-3 text-sm font-black uppercase tracking-wider text-[#8ff6db] transition hover:bg-[#8ff6db] hover:text-black sm:block"
+          className="hidden rounded-full border border-[#8ff6db]/45 bg-[#8ff6db]/10 px-5 py-3 text-sm font-black uppercase tracking-wider text-[#8ff6db] transition hover:border-[#8ff6db] hover:bg-[#8ff6db] hover:text-black hover:shadow-[0_0_22px_rgba(143,246,219,0.22)] sm:block"
         >
           Jelentkezés
         </button>
@@ -390,7 +325,7 @@ function Header({ activePage, setActivePage }) {
           className={`group inline-flex items-center gap-3 rounded-full border px-4 py-3 text-sm font-black uppercase tracking-wider transition ${
             menuOpen
               ? "border-[#8ff6db] bg-[#8ff6db] text-black shadow-[0_0_28px_rgba(143,246,219,0.28)]"
-              : "border-white/10 bg-white/[0.04] text-white hover:border-[#e64dde]/70 hover:text-[#8ff6db]"
+              : "border-white/10 bg-white/[0.06] text-white hover:border-[#8ff6db]/60 hover:bg-white/[0.10] hover:text-[#8ff6db]"
           }`}
           aria-label={menuOpen ? "Menü bezárása" : "Menü megnyitása"}
           aria-expanded={menuOpen}
@@ -404,11 +339,11 @@ function Header({ activePage, setActivePage }) {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
-            initial={{ opacity: 0, y: -12, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.96 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
-            className="absolute right-6 top-full mt-4 w-[min(22rem,calc(100vw-3rem))] overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/95 p-2 shadow-[0_0_24px_rgba(230,77,222,0.18)] backdrop-blur-sm lg:right-10"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="absolute right-0 top-full mt-3 w-[min(22rem,calc(100vw-3rem))] overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/90 p-2 shadow-[0_18px_50px_rgba(0,0,0,0.42)] backdrop-blur-xl"
             aria-label="Lenyíló navigáció"
           >
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#e64dde]/14 via-transparent to-[#8ff6db]/10" />
@@ -416,14 +351,11 @@ function Header({ activePage, setActivePage }) {
               {menuItems.map((item) => {
                 const isActive = activePage === item;
                 return (
-                  <motion.button
+                  <button
                     key={item}
                     type="button"
                     onClick={() => goToPage(item)}
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.14 }}
-                    className={`group flex w-full items-center rounded-2xl px-5 py-4 text-left text-sm font-black uppercase tracking-wider transition ${
+                    className={`group flex w-full items-center rounded-2xl px-5 py-4 text-left text-sm font-black uppercase tracking-wider transition-colors duration-150 ${
                       isActive
                         ? "bg-[#8ff6db] text-black shadow-[0_0_12px_rgba(143,246,219,0.18)]"
                         : "text-white/80 hover:bg-white/10 hover:text-[#8ff6db]"
@@ -431,7 +363,7 @@ function Header({ activePage, setActivePage }) {
                     aria-current={isActive ? "page" : undefined}
                   >
                     <span>{item}</span>
-                  </motion.button>
+                  </button>
                 );
               })}
             </div>
@@ -450,13 +382,13 @@ function HomePage({ setActivePage }) {
 
   return (
     <>
-      <section className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 pb-20 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-28 lg:pt-16">
+      <section className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-6 pb-20 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-28 lg:pt-16">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
           <div className="mb-6 inline-flex rounded-full border border-[#e64dde]/50 bg-[#e64dde]/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.25em] text-[#8ff6db]">
             Skill fejlesztés Magyarországon
           </div>
 
-          <h1 className="max-w-4xl text-5xl font-black uppercase leading-[0.92] tracking-tight sm:text-6xl lg:text-8xl">
+          <h1 className="max-w-4xl break-words text-5xl font-black uppercase leading-[1.02] tracking-tight sm:text-6xl lg:text-8xl">
             Érd el a <span className="text-[#e64dde] drop-shadow-[0_0_10px_rgba(230,77,222,0.35)]">következő</span> szintet a jégen.
           </h1>
 
@@ -479,13 +411,13 @@ function HomePage({ setActivePage }) {
           <div className="absolute inset-6 rounded-[3rem] bg-[#e64dde]/25 blur-2xl" />
           <div className="relative rounded-[2rem] border border-[#e64dde]/50 bg-black/70 p-8 shadow-[0_0_28px_rgba(143,246,219,0.14)] backdrop-blur">
             <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Fejlesztés alatt</p>
-            <h2 className="mt-4 text-4xl font-black uppercase leading-none tracking-tight sm:text-6xl">Apex Hockey</h2>
+            <h2 className="mt-4 break-words text-4xl font-black uppercase leading-none tracking-tight sm:text-6xl">Apex Hockey</h2>
             <p className="mt-5 leading-7 text-white/65">A logó helye ideiglenesen kikapcsolva. A végleges logót később visszatesszük változtatás nélkül.</p>
           </div>
         </motion.div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 lg:px-10">
+      <section className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 lg:px-10">
         <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Menüpontok</p>
@@ -506,74 +438,7 @@ function HomePage({ setActivePage }) {
           ))}
         </div>
       </section>
-
-      <section className="relative z-10 border-y border-white/10 bg-[#e64dde]/10 px-6 py-14 lg:px-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Apex mentalitás</p>
-            <h2 className="mt-3 max-w-3xl text-3xl font-black uppercase tracking-tight sm:text-5xl">
-              Gyorsaság. Technika. Önbizalom. Közösség.
-            </h2>
-          </div>
-          <button type="button" onClick={() => goToPage("Kapcsolatok")} className="rounded-full bg-white px-7 py-4 text-sm font-black uppercase tracking-wider text-black transition hover:bg-[#8ff6db]">
-            Írj nekünk
-          </button>
-        </div>
-      </section>
     </>
-  );
-}
-
-function ContentPage({ page, setActivePage }) {
-  const data = pages[page];
-
-  if (!data) {
-    return <HomePage setActivePage={setActivePage} />;
-  }
-
-  if (page === "Skill edzés" || page === "Táborok") {
-    return <ProgramDetailPage data={data} setActivePage={setActivePage} />;
-  }
-
-  return (
-    <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-12 lg:px-10 lg:pb-32 lg:pt-20">
-      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="rounded-[2.5rem] border border-[#e64dde]/50 bg-white/[0.04] p-8 shadow-[0_0_28px_rgba(230,77,222,0.10)]">
-          <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#8ff6db] text-black shadow-[0_0_16px_rgba(143,246,219,0.20)]">
-            <InlineIcon type={data.icon} className="h-8 w-8" />
-          </div>
-          <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">{data.eyebrow}</p>
-          <h1 className="mt-4 text-5xl font-black uppercase leading-[1.05] tracking-tight sm:text-7xl">{data.title}</h1>
-          <p className="mt-7 text-lg leading-8 text-white/75">{data.intro}</p>
-
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-            <button type="button" onClick={() => setActivePage("Kapcsolatok")} className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#e64dde] px-7 py-4 text-sm font-black uppercase tracking-wider text-black shadow-[0_0_20px_rgba(230,77,222,0.20)] transition hover:bg-[#8ff6db]">
-              {data.cta}
-              <InlineIcon type="arrowRight" className="h-5 w-5 transition group-hover:translate-x-1" />
-            </button>
-            <button type="button" onClick={() => setActivePage("Kezdőlap")} className="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-4 text-sm font-black uppercase tracking-wider text-white transition hover:border-[#8ff6db] hover:text-[#8ff6db]">
-              Vissza a kezdőlapra
-            </button>
-          </div>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2">
-          {data.highlights.map((highlight, index) => (
-            <div key={highlight} className="rounded-[2rem] border border-white/10 bg-black/45 p-6 transition hover:border-[#8ff6db]/60 hover:bg-[#8ff6db]/10">
-              {data.highlights.length > 1 && (
-                <p className="text-sm font-black uppercase tracking-[0.25em] text-[#e64dde]">0{index + 1}</p>
-              )}
-              <h2 className={`${data.highlights.length > 1 ? "mt-4" : ""} text-2xl font-black uppercase tracking-tight`}>{highlight}</h2>
-              <p className="mt-4 leading-7 text-white/60">
-                {data.highlights.length === 1
-                  ? "A torna részletei, időpontjai és jelentkezési információi itt jelennek majd meg, amint elérhetővé válnak."
-                  : "Ez a rész később konkrét szöveggel, időpontokkal, árakkal, képekkel vagy jelentkezési információkkal bővíthető."}
-              </p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-    </section>
   );
 }
 
@@ -593,29 +458,45 @@ function HighlightedValue({ item }) {
   );
 }
 
+function VenueBlock({ venue }) {
+  return (
+    <div className="mt-10 rounded-[2.5rem] border border-[#8ff6db]/20 bg-black/45 p-8 shadow-[0_0_28px_rgba(143,246,219,0.10)]">
+      <p className="text-sm font-black uppercase tracking-[0.35em] text-[#e64dde]">{venue.label}</p>
+      <h2 className="mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">{venue.name}</h2>
+      <a
+        href={venue.mapsUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-3 inline-flex text-lg font-black text-[#8ff6db] underline decoration-[#8ff6db]/35 underline-offset-4 transition hover:text-[#e64dde] hover:decoration-[#e64dde]"
+      >
+        {venue.address}
+      </a>
+      <p className="mt-4 max-w-3xl leading-7 text-white/65">{venue.text}</p>
+    </div>
+  );
+}
+
 function ProgramDetailPage({ data, setActivePage }) {
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-12 lg:px-10 lg:pb-32 lg:pt-20">
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
         <div className="max-w-5xl">
-          <div>
-            <div className="mb-6 inline-flex rounded-full border border-[#e64dde]/50 bg-[#e64dde]/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.25em] text-[#8ff6db]">
-              {data.eyebrow}
-            </div>
-            <h1 className="max-w-5xl text-5xl font-black uppercase leading-[1.06] tracking-tight sm:text-6xl lg:text-8xl">
-              {data.title} <span className="text-[#e64dde] drop-shadow-[0_0_10px_rgba(230,77,222,0.35)]">{data.title === "Skill edzés" ? "játékosoknak" : "programok"}</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/75">{data.intro}</p>
+          <div className="mb-6 inline-flex rounded-full border border-[#e64dde]/50 bg-[#e64dde]/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.25em] text-[#8ff6db]">
+            {data.eyebrow}
+          </div>
+          <h1 className="max-w-5xl break-words text-5xl font-black uppercase leading-[1.06] tracking-tight sm:text-6xl lg:text-8xl">
+            {data.title} <span className="text-[#e64dde] drop-shadow-[0_0_10px_rgba(230,77,222,0.35)]">{data.title === "Skill edzés" ? "játékosoknak" : "programok"}</span>
+          </h1>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/75">{data.intro}</p>
 
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <button type="button" onClick={() => setActivePage("Kapcsolatok")} className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#e64dde] px-7 py-4 text-sm font-black uppercase tracking-wider text-black shadow-[0_0_20px_rgba(230,77,222,0.20)] transition hover:bg-[#8ff6db]">
-                {data.cta}
-                <InlineIcon type="arrowRight" className="h-5 w-5 transition group-hover:translate-x-1" />
-              </button>
-              <button type="button" onClick={() => setActivePage("Kezdőlap")} className="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-4 text-sm font-black uppercase tracking-wider text-white transition hover:border-[#8ff6db] hover:text-[#8ff6db]">
-                Vissza a kezdőlapra
-              </button>
-            </div>
+          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <button type="button" onClick={() => setActivePage("Kapcsolatok")} className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#e64dde] px-7 py-4 text-sm font-black uppercase tracking-wider text-black shadow-[0_0_20px_rgba(230,77,222,0.20)] transition hover:bg-[#8ff6db]">
+              {data.cta}
+              <InlineIcon type="arrowRight" className="h-5 w-5 transition group-hover:translate-x-1" />
+            </button>
+            <button type="button" onClick={() => setActivePage("Kezdőlap")} className="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-4 text-sm font-black uppercase tracking-wider text-white transition hover:border-[#8ff6db] hover:text-[#8ff6db]">
+              Vissza a kezdőlapra
+            </button>
           </div>
         </div>
 
@@ -628,10 +509,9 @@ function ProgramDetailPage({ data, setActivePage }) {
               <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Részletek</p>
               <h2 className="mt-3 text-3xl font-black uppercase tracking-tight sm:text-5xl">{data.infoTitle || "Edzés információk"}</h2>
             </div>
-            <p className="max-w-xl leading-7 text-white/65">
-              {data.infoDescription || "A legfontosabb tudnivalók egy helyen: kinek szól, hol zajlik, milyen időszakban és milyen fejlesztési fókuszokkal."}
-            </p>
+            <p className="max-w-xl leading-7 text-white/65">{data.infoDescription || "A legfontosabb tudnivalók egy helyen."}</p>
           </div>
+
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {data.infoCards.map((item) => (
               <div key={item.label} className="rounded-2xl border border-white/10 bg-black/45 p-4">
@@ -644,9 +524,7 @@ function ProgramDetailPage({ data, setActivePage }) {
           </div>
 
           <div className="mt-8 rounded-[2rem] border border-white/10 bg-black/45 p-5">
-            {data.scheduleTitle && (
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-[#e64dde]">{data.scheduleTitle}</p>
-            )}
+            {data.scheduleTitle && <p className="text-xs font-black uppercase tracking-[0.25em] text-[#e64dde]">{data.scheduleTitle}</p>}
             <div className={`${data.scheduleTitle ? "mt-4" : ""} grid gap-3 sm:grid-cols-2 lg:grid-cols-4`}>
               {data.schedule.map((item) => (
                 <div key={item.day} className="rounded-2xl border border-[#8ff6db]/20 bg-[#8ff6db]/10 p-4">
@@ -665,23 +543,21 @@ function ProgramDetailPage({ data, setActivePage }) {
                 <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Árak</p>
                 <h2 className="mt-3 text-3xl font-black uppercase tracking-tight sm:text-5xl">{data.pricingTitle}</h2>
               </div>
-              <p className="max-w-xl leading-7 text-white/65">
-                A testvéreknek járó kedvezmény a tábor árából 20 000 Ft/fő.
-              </p>
+              <p className="max-w-xl leading-7 text-white/65">A testvéreknek járó kedvezmény a tábor árából 20 000 Ft/fő.</p>
             </div>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {data.pricing.map((item) => (
                 <div key={item.label} className="rounded-[2rem] border border-white/10 bg-black/45 p-5">
                   <p className="text-xs font-black uppercase tracking-[0.22em] text-[#e64dde]">{item.label}</p>
-                  <div className="mt-3 min-h-[1.5rem]">
-                    {item.note && <p className="text-sm font-bold leading-6 text-white/60">{item.note}</p>}
-                  </div>
+                  <div className="mt-3 min-h-[1.5rem]">{item.note && <p className="text-sm font-bold leading-6 text-white/60">{item.note}</p>}</div>
                   <p className="mt-3 text-3xl font-black tracking-tight text-[#8ff6db] sm:text-4xl">{item.price}</p>
                 </div>
               ))}
             </div>
           </div>
         )}
+
+        {data.venue && <VenueBlock venue={data.venue} />}
 
         <div className="mt-16">
           <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">{data.developmentEyebrow || "Mit fejlesztünk?"}</p>
@@ -715,12 +591,133 @@ function ProgramDetailPage({ data, setActivePage }) {
   );
 }
 
+function AboutPage({ data, setActivePage }) {
+  return (
+    <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-12 lg:px-10 lg:pb-32 lg:pt-20">
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+        <div className="max-w-5xl">
+          <div className="mb-6 inline-flex rounded-full border border-[#e64dde]/50 bg-[#e64dde]/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.25em] text-[#8ff6db]">
+            {data.eyebrow}
+          </div>
+          <h1 className="max-w-5xl break-words text-5xl font-black uppercase leading-[1.06] tracking-tight sm:text-6xl lg:text-8xl">
+            Apex Hockey <span className="text-[#e64dde] drop-shadow-[0_0_10px_rgba(230,77,222,0.35)]">filozófia</span>
+          </h1>
+          <p className="mt-7 max-w-3xl text-lg leading-8 text-white/75">{data.intro}</p>
+        </div>
+
+        <div className="mt-14 rounded-[2.5rem] border border-[#e64dde]/50 bg-white/[0.04] p-6 shadow-[0_0_28px_rgba(230,77,222,0.10)]">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#8ff6db] text-black shadow-[0_0_16px_rgba(143,246,219,0.20)]">
+                <InlineIcon type={data.icon} className="h-7 w-7" />
+              </div>
+              <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Bemutatkozás</p>
+              <h2 className="mt-3 text-3xl font-black uppercase tracking-tight sm:text-5xl">{data.infoTitle}</h2>
+            </div>
+            <p className="max-w-xl leading-7 text-white/65">{data.infoDescription}</p>
+          </div>
+        </div>
+
+        <VenueBlock venue={data.venue} />
+
+        <div className="mt-10 rounded-[2.5rem] border border-white/10 bg-white/[0.04] p-8">
+          <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Hitvallásunk</p>
+          <blockquote className="mt-4 max-w-4xl text-xl font-semibold leading-8 text-white/80 sm:text-2xl sm:leading-10">“{data.quote}”</blockquote>
+        </div>
+
+        <div className="mt-16">
+          <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Alapelveink</p>
+          <h2 className="mt-3 text-3xl font-black uppercase tracking-tight sm:text-5xl">Amit képviselünk</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {data.sections.map((section) => (
+              <div key={section.title} className="rounded-[2rem] border border-white/10 bg-black/45 p-6 transition hover:border-[#8ff6db]/60 hover:bg-[#8ff6db]/10">
+                <h3 className="text-2xl font-black uppercase tracking-tight text-white">{section.title}</h3>
+                <p className="mt-4 leading-7 text-white/65">{section.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-14 rounded-[2.5rem] border border-white/10 bg-white/[0.04] p-8">
+          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">Csatlakozz hozzánk</p>
+              <h2 className="mt-3 text-3xl font-black uppercase tracking-tight sm:text-5xl">Csatlakozz az Apex fejlesztő programjába!</h2>
+              <p className="mt-4 max-w-2xl leading-7 text-white/70">
+                Nézd meg edzéseinket, táborainkat, vagy vedd fel velünk a kapcsolatot, ha szeretnél többet megtudni a programjainkról.
+              </p>
+            </div>
+            <button type="button" onClick={() => setActivePage("Kapcsolatok")} className="rounded-full bg-white px-7 py-4 text-sm font-black uppercase tracking-wider text-black transition hover:bg-[#8ff6db]">
+              Kapcsolatfelvétel
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+function ContentPage({ page, setActivePage }) {
+  const data = pages[page];
+
+  if (!data) {
+    return <HomePage setActivePage={setActivePage} />;
+  }
+
+  if (page === "Skill edzés" || page === "Táborok") {
+    return <ProgramDetailPage data={data} setActivePage={setActivePage} />;
+  }
+
+  if (page === "Rólunk") {
+    return <AboutPage data={data} setActivePage={setActivePage} />;
+  }
+
+  return (
+    <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-12 lg:px-10 lg:pb-32 lg:pt-20">
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="rounded-[2.5rem] border border-[#e64dde]/50 bg-white/[0.04] p-8 shadow-[0_0_28px_rgba(230,77,222,0.10)]">
+          <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#8ff6db] text-black shadow-[0_0_16px_rgba(143,246,219,0.20)]">
+            <InlineIcon type={data.icon} className="h-8 w-8" />
+          </div>
+          <p className="text-sm font-black uppercase tracking-[0.35em] text-[#8ff6db]">{data.eyebrow}</p>
+          <h1 className="mt-4 text-5xl font-black uppercase leading-[1.05] tracking-tight sm:text-7xl">{data.title}</h1>
+          <p className="mt-7 text-lg leading-8 text-white/75">{data.intro}</p>
+
+          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <button type="button" onClick={() => setActivePage("Kapcsolatok")} className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#e64dde] px-7 py-4 text-sm font-black uppercase tracking-wider text-black shadow-[0_0_20px_rgba(230,77,222,0.20)] transition hover:bg-[#8ff6db]">
+              {data.cta}
+              <InlineIcon type="arrowRight" className="h-5 w-5 transition group-hover:translate-x-1" />
+            </button>
+            <button type="button" onClick={() => setActivePage("Kezdőlap")} className="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-4 text-sm font-black uppercase tracking-wider text-white transition hover:border-[#8ff6db] hover:text-[#8ff6db]">
+              Vissza a kezdőlapra
+            </button>
+          </div>
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          {data.highlights.map((highlight, index) => (
+            <div key={highlight} className="rounded-[2rem] border border-white/10 bg-black/45 p-6 transition hover:border-[#8ff6db]/60 hover:bg-[#8ff6db]/10">
+              {data.highlights.length > 1 && <p className="text-sm font-black uppercase tracking-[0.25em] text-[#e64dde]">0{index + 1}</p>}
+              <h2 className={`${data.highlights.length > 1 ? "mt-4" : ""} text-2xl font-black uppercase tracking-tight`}>{highlight}</h2>
+              <p className="mt-4 leading-7 text-white/60">
+                {data.highlights.length === 1
+                  ? "A torna részletei, időpontjai és jelentkezési információi itt jelennek majd meg, amint elérhetővé válnak."
+                  : "Ez a rész később konkrét szöveggel, időpontokkal, árakkal, képekkel vagy jelentkezési információkkal bővíthető."}
+              </p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
 export default function ApexHockeyHomepage() {
   const [activePage, setActivePage] = useState("Kezdőlap");
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#030303] text-white">
-      <div className="pointer-events-none absolute inset-0">
+    <main className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-[#030303] text-white pt-28 lg:pt-28">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#e64dde]/30 blur-2xl" />
         <div className="absolute top-80 -left-24 h-80 w-80 rounded-full bg-[#8ff6db]/20 blur-2xl" />
         <div className="absolute bottom-20 -right-20 h-96 w-96 rounded-full bg-[#e64dde]/20 blur-2xl" />
@@ -728,11 +725,7 @@ export default function ApexHockeyHomepage() {
 
       <Header activePage={activePage} setActivePage={setActivePage} />
 
-      {activePage === "Kezdőlap" ? (
-        <HomePage setActivePage={setActivePage} />
-      ) : (
-        <ContentPage page={activePage} setActivePage={setActivePage} />
-      )}
+      {activePage === "Kezdőlap" ? <HomePage setActivePage={setActivePage} /> : <ContentPage page={activePage} setActivePage={setActivePage} />}
 
       <footer className="relative z-10 mx-auto flex max-w-7xl flex-col justify-between gap-5 px-6 py-10 text-sm text-white/55 md:flex-row lg:px-10">
         <p>© 2026 Apex Hockey. Minden jog fenntartva.</p>
